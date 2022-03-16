@@ -229,8 +229,8 @@ button{
     text-align: center;
     top: 20px;
     left: -90px;
-    box-shadow: 5px 5px 20px rgba(34, 33, 33, 0.2);
-    /* filter: brightness(10%); */
+    /* box-shadow: 5px 5px 20px rgba(34, 33, 33, 0.2); */
+    /* filter: brightness(90%); */
 }
 .profile>img{
     width: 100%;
@@ -644,6 +644,7 @@ h4{
 .active-link{
     color: #3359de !important;
     font-size: bold !important;
+    text-shadow: 5px 5px 5px #3359de;
 }
 
 .demo-btn{
