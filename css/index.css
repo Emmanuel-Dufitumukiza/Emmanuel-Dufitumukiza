@@ -693,9 +693,101 @@ color: white;
     display: none;
 }
 
+.navbars {
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    height: 60px;
+    border-top: 1px solid lavender;
+    display: none;
+    z-index: 1;
+  }
+
+  .navbars-cont{
+    overflow: hidden;
+    background-color: rgb(255, 251, 251);
+    position: fixed;
+    bottom: 0px;
+    width: 100vw;
+    height: 220px;
+    border-top: 1px solid lavender;
+    display: none;
+    z-index: 100;
+  }
+  
+  .navbars a {
+    float: left;
+    display: block;
+    color: #7e3a3a;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 25px;
+  }
+  
+  .navbars a:hover {
+    background: #f1f1f1;
+    color: black;
+  }
+
+  .closeBtn{
+      float: right;
+  }
+
+  .closeBtn>a{
+      font-size: 30px;
+      position: relative;
+      right: 30px;
+      top: -3px;
+  }
+
+  .top-one-social{
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-top: 15px;
+  }
+
+  .top-one-social>div{
+      text-align: center;
+  }
+  
+  .navbars a.active {
+    /* background-color: #04AA6D; */
+    color: white;
+  }
+
+  .navbars>div{
+      float: right;
+      margin-right: 20px;
+  }
+
+  
+  .logo-cont2{
+    width: 40px;
+    height: 40px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* top: -50px;
+    position: absolute;
+    left: 35.5%; */
+    cursor: pointer;
+}
+
 @media screen and (max-width: 800px) {
+
+    #menus:checked~.navbars-cont{
+        display: block !important;
+    }
+
     .links-cont{
         display: none !important;
+    }
+    .navbars{
+        display: block;
     }
     .sm-title:last-of-type{
      margin-bottom: 50px;
@@ -783,7 +875,7 @@ color: white;
     .contactmepage{
         top: 10px;
         height: auto !important;
-        margin-bottom: 100px;
+        margin-bottom: 50px;
     }
 
     .right-one,.left-one{
@@ -891,6 +983,54 @@ color: white;
         width: 200px;
         height: 200px;
     }
+
+    .downl{
+        top: -75px;
+        left: 18%;
+    }
+
+    #portfolio{
+        top: -60px;
+    }
+
+    .short-nav2{
+        position: relative;
+        top: -70px;
+    }
+
+    .short-nav22{
+        position: relative;
+        top: -115px !important;
+    }
+
+    .img-cont{
+        top: -50px;
+    }
+
+    .dots-cont{
+        top: -20px;
+        left: 20px;
+    }
+
+    #skills{
+        top: -130px !important;
+    }
+
+    #contactme{
+        position: relative;
+        top: -170px !important;
+    }
+
+    .skills-page{
+        top: -65px !important;
+    }
+    
+    .first-img{
+        height: 200px !important;
+        background-size: cover !important;
+        border-radius: 20px;
+    }
+
 }
 
 @media screen and (max-width: 500px){
@@ -925,3 +1065,13 @@ color: white;
        top: -40px;
     }
 }
+
+@media screen and (min-width: 421px) {
+    .contactmepage{
+        top: 10px;
+        height: auto !important;
+        margin-bottom: 200px;
+    }
+}
+
+ 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script>
+        <!-- ===== CSS ===== -->
+        <link rel="stylesheet" href="../css/admin.css">
+
+        <title>Add Blog</title>
+    </head>
+    <body class="body-pd" id="body-pd">
+        <header class="header body-pd" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+
+            <h3 class="page-title">Post Blog</h3>
+
+            <div class="header__img">
+                <img src="../images/me.png" alt="">
+            </div>
+        </header>
+
+        <div class="l-navbar show" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav__logo">
+                        <i class='bx bx-layer nav__logo-icon'></i>
+                        <span class="nav__logo-name">Emmanuel</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <a href="#" class="nav__link">
+                        <i class='bx bx-grid-alt nav__icon' ></i>
+                            <span class="nav__name">Dashboard</span>
+                        </a>
+
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__name">Users</span>
+                        </a>
+                        
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-message-square-detail nav__icon' ></i>
+                            <span class="nav__name">Messages</span>
+                        </a>
+
+                        <a href="./admin.blogs.html" class="nav__link">
+                            <i class='bx bx-bookmark nav__icon' ></i>
+                            <span class="nav__name">Blogs</span>
+                        </a>
+
+                        <a href="./addBlog.html" class="nav__link active">
+                            <i class='bx bx-folder nav__icon' ></i>
+                            <span class="nav__name">Add Blog</span>
+                        </a>
+
+                        <!-- <a href="#" class="nav__link">
+                            <i class='fa fa-user nav__icon' ></i>
+                            <span class="nav__name">Profile</span>
+                        </a> -->
+                    </div>
+                </div>
+
+                <a href="./index.html" class="nav__link">
+                    <i class='bx bx-log-out nav__icon' ></i>
+                    <span class="nav__name">Log Out</span>
+                </a>
+            </nav>
+        </div>
+
+      <div class="blogs">
+        <br><br>
+        <!-- <h4>Add Blog</h4> -->
+
+        <div class="form-cont">
+            <form>
+              <label for="fname">Blog Title</label>
+              <input type="text" id="fname" name="firstname" placeholder="Blog Title">
+          
+              <label for="lname">Description</label>
+              <textarea name="" id="" rows="4" placeholder="Description"></textarea>
+
+              <button type="button" class="uploadbtn"><label class="file" for="file">
+                <i class="fa fa-upload"></i>  Upload Image
+            </label></button>
+                <input style="display: none;" type="file" id="file" aria-label="File browser example">
+            
+              <input type="submit" value="Add Blog">
+            </form>
+          </div>
+
+      </div>
+    </body>
+</html>
