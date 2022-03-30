@@ -155,7 +155,7 @@ a{
 }
 
 /* ===== MEDIA QUERIES=====*/
-@media screen and (min-width: 768px){
+@media screen and (min-width: 800px){
   body{
     margin: calc(var(--header-height) + 1rem) 0 0 0;
     padding-left: calc(var(--nav-width) + 2rem);
@@ -308,4 +308,13 @@ input[type=submit]:hover {
   margin-bottom: 20px;
   margin-top: 20px;
   float: right;
+}
+
+
+@media screen and (max-width: 1000px) {
+
+  .editBtn, .moreBtn{
+      display: none !important;
+  }
+
 }

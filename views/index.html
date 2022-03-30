@@ -56,7 +56,7 @@
 
         <div class="right-pic-cont">
           <div class="profile profile-mobile">
-              <img src="../images/me2.png" alt="">
+              <img src="../images/pic.jpg" alt="">
           </div>
       </div>
 
@@ -99,7 +99,7 @@
 
           <div class="right-pic-cont">
             <div class="profile">
-                <img src="../images/me2.png" alt="">
+                <img src="../images/pic.jpg" alt="">
             </div>
         </div>
 
@@ -112,7 +112,7 @@
          <div class="aboutmecont">
             <div class="left-one">
                 <div class="profile2">
-                    <img src="../images/me2.png" alt="">
+                    <img src="../images/pic.jpg" alt="">
                 </div>
             </div>
 
@@ -392,21 +392,24 @@
           <div class="right-one">
         
             <div class="form__div">
-                <input type="text" class="form__input" placeholder=" ">
-                <label for="" class="form__label">Your Name*</label>
+                <input onkeyup="validate()" id="username" type="text" class="form__input" placeholder=" ">
+                <label for="" id="usernamelabel" class="form__label">Your Name*</label>
             </div>
+            <span id="usernameError"></span>
 
             <div class="form__div">
-                <input type="text" class="form__input" placeholder=" ">
-                <label for="" class="form__label">Your Email*</label>
+                <input onkeyup="validateEmail()" id="useremail" type="text" class="form__input" placeholder=" ">
+                <label for="" id="emaillabel" class="form__label">Your Email*</label>
             </div>
+            <span id="emailError"></span>
 
             <div class="form__div textarea-cont">
-                <textarea  class="form__input" placeholder=" "></textarea>
-                <label for="" class="form__label">Message*</label>
+                <textarea onkeyup="validateMessage()" id="message"  class="form__input" placeholder=" "></textarea>
+                <label for="" id="messagelabel" class="form__label">Message*</label>
             </div>
+            <span id="messageError"></span>
 
-            <button class="download-btn btn sendbtn">Send Message &nbsp;<i class="uil uil-message button__icon"></i> </button>
+            <button onclick="validateAll()" class="download-btn btn sendbtn">Send Message &nbsp;<i class="uil uil-message button__icon"></i> </button>
           
           </div>
 
@@ -464,5 +467,85 @@
       </form>
     </div>
     </div>
+
+    <script>
+      function validate(){
+        let username = document.getElementById("username").value.trim();
+        let email = document.getElementById("useremail").value.trim();
+        let message = document.getElementById("message").value.trim();
+
+        if(username.length == 0){
+          document.getElementById("usernameError").style.display = "block"
+          document.getElementById("username").style.borderColor="orangered"
+          document.getElementById("usernamelabel").style.color="orangered"
+          document.getElementById("usernameError").innerHTML = "Your name is required*"
+        }
+        if(username.length>0 && username.length<4){
+          document.getElementById("usernameError").style.display = "block"
+          document.getElementById("username").style.borderColor="orangered"
+          document.getElementById("usernamelabel").style.color="orangered"
+          document.getElementById("usernameError").innerHTML = "Your name must be at least 4 characters*"
+        }
+        if(username.length>3){
+          document.getElementById("usernameError").style.display = "none"
+          document.getElementById("username").style.borderColor="forestgreen"
+          document.getElementById("usernamelabel").style.color="forestgreen"
+          document.getElementById("usernameError").innerHTML = ""
+        }
+      }
+
+      function validateMessage(){
+    let message = document.getElementById("message").value.trim();
+
+    if(message.length == 0){
+      document.getElementById("messageError").style.display = "block"
+      document.getElementById("message").style.borderColor="orangered"
+      document.getElementById("messagelabel").style.color="orangered"
+      document.getElementById("messageError").innerHTML = "Message is required*"
+    }
+    if(message.length>0){
+      document.getElementById("messageError").style.display = "none"
+      document.getElementById("message").style.borderColor="forestgreen"
+      document.getElementById("messagelabel").style.color="forestgreen"
+      document.getElementById("messageError").innerHTML = ""
+    }
+  }
+
+  function validateEmail(){
+    let email = document.getElementById("useremail").value.trim();
+
+    if(email.length == 0){
+      document.getElementById("emailError").style.display = "block"
+      document.getElementById("useremail").style.borderColor="orangered"
+      document.getElementById("emaillabel").style.color="orangered"
+      document.getElementById("emailError").innerHTML = "Email is required*"
+    }
+    if(email.length>0){
+
+
+if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+{
+      document.getElementById("emailError").style.display = "none"
+      document.getElementById("useremail").style.borderColor="forestgreen"
+      document.getElementById("emaillabel").style.color="forestgreen"
+      document.getElementById("emailError").innerHTML = ""
+      return true;
+}
+document.getElementById("emailError").style.display = "block"
+      document.getElementById("useremail").style.borderColor="orangered"
+      document.getElementById("emaillabel").style.color="orangered"
+      document.getElementById("emailError").innerHTML = "Invalid Email address format"
+    }
+  }
+
+  function validateAll(){
+    validate();
+    validateMessage();
+    validateEmail();
+  }
+
+
+    </script>
+
 </body>
 </html>

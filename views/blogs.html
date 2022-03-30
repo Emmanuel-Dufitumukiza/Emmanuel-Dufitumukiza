@@ -324,5 +324,15 @@
       </a>
     <div>
     </div>
+
+    <script>
+     let blogs = document.getElementsByClassName("column");
+
+     for(let i=0; i<blogs.length; i++){
+       blogs[i].addEventListener("click", (e)=>{
+         window.location = "./blog-view.html"
+       })
+     }
+    </script>
 </body>
 </html>
