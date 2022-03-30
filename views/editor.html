@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="main.css">
+        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <style>
+             @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body{
+    background-color: #1976d2;
+}
+.container-d{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 60%;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    padding: 15px;
+}
+ h1{
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Roboto',sans-serif;
+}
+p{
+    font-family: 'Open-Sans',sans-serif;
+}
+.container-d #editor{
+    height: 500px;
+}
+        </style>
+    </head>
+    
+  <body>
+   <div class="container-d">
+       <h1>POST A BLOG
+       </h1>
+    <div id="editor">
+        <p>This is some sample content.</p>
+    </div>
+   </div>
+    
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+</body>
+
+</html>

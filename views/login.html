@@ -51,7 +51,7 @@
 
     </div>
 
-    <div class="right-cont">
+    <div class="right-cont form-conts">
 
         <div class="l-form">
             <form action="./admin.blogs.html" class="form">
@@ -72,49 +72,87 @@
         </div>
 
     </div>
-    <div class="navbars-cont">
 
-      <div class="top-one-social">
-           <div>
-            <i class="fa fa-home change-theme"></i>
-            <p>Home</p>
+    <div class="navbars-cont" id="menuBottom">
+
+        <div class="top-one-social">
+             <a href="./index.html#" onclick="hideMenu()">
+              <div>
+                <i class="fa fa-home change-theme"></i>
+                <p>Home</p>
+               </div>
+             </a>
+           <a href="./index.html#aboutme" onclick="hideMenu()">
+            <div>
+              <i class="fa fa-user change-theme"></i>
+              <p>About me</p>
+             </div>
+           </a>
+           <a href="./index.html#portfolio" onclick="hideMenu()">
+            <div>
+              <i class="change-theme fa-solid fa-diagram-project"></i>
+              <p>Portfolio</p>
+             </div>
+           </a>
+        </div>
+  
+        <div class="top-one-social">
+          <a href="./blogs.html">
+            <div>
+              <i class="change-theme fa-solid fa-blog"></i>
+              <p>Blogs</p>
+             </div>
+          </a>
+        <a href="./index.html#skills" onclick="hideMenu()">
+          <div>
+            <i class="change-theme fa-solid fa-graduation-cap"></i>
+            <p>Skills</p>
            </div>
-           <div>
-            <i class="fa fa-user change-theme"></i>
-            <p>About me</p>
+        </a>
+         <a href="./index.html#contactme" onclick="hideMenu()">
+          <div>
+            <i class="uil uil-message change-theme"></i>
+            <p>Contact me</p>
            </div>
-           <div>
-            <i class="change-theme fa-solid fa-diagram-project"></i>
-            <p>Portfolio</p>
-           </div>
+         </a>
+     </div>
+  
+     <a href="./login.html" class="closeBtn" style="float: left;margin-left: 37px;margin-top: 3px;">
+     <i class="fa fa-sign-in"></i> Login
+     </a>
+  
+      <div class="closeBtn">
+        <!-- <a href="#news"><i class="fa-moon uil uil-moon change-theme"></i></a> -->
+        <a onclick="hideMenu()"><i class="fa fa-close change-theme"></i></a>
+      </div>
+      </div>
+      <div class="navbars">
+        <a href="#home" class="active">
+          <div class="logo-cont2">
+              
+          </div>
+        </a>
+      <div>
+        <form action="">
+          <a href="#news"><i class="fa-moon uil uil-moon change-theme"></i></a>
+          <!-- <input type="checkbox" id="menus">
+        <label for="menus">toggle</label> -->
+        <a onclick="menuBottom()"><i class="fa fa-bars change-theme"></i></a>
+        </form>
+      </div>
       </div>
 
-      <div class="top-one-social">
-        <div>
-         <i class="change-theme fa-solid fa-blog"></i>
-         <p>Blogs</p>
-        </div>
-        <div>
-         <i class="change-theme fa-solid fa-graduation-cap"></i>
-         <p>Skills</p>
-        </div>
-        <div>
-         <i class="uil uil-message change-theme"></i>
-         <p>Contact me</p>
-        </div>
-   </div>
-    <div class="closeBtn">
-      <!-- <a href="#news"><i class="fa-moon uil uil-moon change-theme"></i></a> -->
-      <a href="#contact"><i class="fa fa-close change-theme"></i></a>
     </div>
-    </div>
-    <div class="navbars">
-      <a href="#home" class="active">
-        <div class="logo-cont2">
-            
-        </div>
-      </a>
-    <div>
-    </div>
+
+    <script>
+          function menuBottom(){
+    document.getElementById("menuBottom").style.display = "block"
+  }
+
+  
+  function hideMenu(){
+    document.getElementById("menuBottom").style.display = "none"
+  }
+    </script>
 </body>
 </html>

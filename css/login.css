@@ -111,3 +111,20 @@ h1{
 .form__input:focus{
   border: 1.5px solid var(--first-color) !important ;
 }
+
+@media screen and (max-width: 700px) {
+   .form{
+     width: 100% !important;
+  margin-left: 0px !important;
+   }
+
+   .l-form{
+     width: 100%;
+  margin-left: 0px !important;
+   }
+
+   .form-conts{
+  margin-left: 0px !important;
+  width: 100%;
+   }
+} 

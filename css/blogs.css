@@ -218,3 +218,31 @@
     object-position: center;
     border-radius: 5px;
   }
+
+
+  @media screen and (max-width: 600px){
+    .container{
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 100% !important;
+    }
+    .container .column {
+      width: 100%;
+    }
+
+    .img-blog{
+      width: 100%;
+    }
+    .comment-area{
+      display: block;
+    }
+    
+    .form__div2{
+      width: 100% !important;
+      margin-bottom: -60px !important;
+    }
+
+    .commentBtn{
+      margin-bottom: 160px !important;
+    }
+  }
