@@ -12,6 +12,7 @@
   />
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/skills.css">
+    <link rel="stylesheet" href="../css/blogs.css">
 </head>
 <body>
     <div class="navbar">
@@ -26,7 +27,23 @@
                 <button><i class="fa-moon uil uil-moon change-theme"></i></button>
             </div>
            <div>
-            <a style="text-decoration: none;" href="./login.html"><button class="btn"> <i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <a id="logSign" style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <div id="profileauth" class="loggedUser">
+              <div class="dropdown  ">
+              <div style="display: flex;">
+                <div class="imggg">
+                  <img src="../images/me.png" alt="">
+                </div>
+                &nbsp;<p style="font-weight: bold;font-style: italic;" id="username-display"></p>
+              </div>
+                
+                <div class="dropdown-content">
+                  <a href="#">Your Profile</a>
+                  <a href="#">Settings</a>
+                <a href="#" onclick="logout()">Logout</a>
+                </div>
+              </div>
+            </div>
            </div>
         </div>
     </div>
@@ -172,25 +189,48 @@
         <a href="">Desktop App</a> &nbsp; &nbsp;
         <a href="">UI Design</a>
     </div>
-
+<!-- 
         <div class="slide-show-cont">
 
-            <div class="img-cont">
-                <button class="left-slide"><i class="fa-solid fa-chevron-left"></i></button>
-             <div class="first-img">
-                 <button class=" demo-btn">Demo&nbsp; <i class=" fa fa-arrow-right"></i></button>
-             </div>
-             <button class="right-slide"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
+      
 
-            <div class="dots-cont">
-                <div class="active-dot dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
+        </div> -->
 
-        </div>
+        <div class="slideshow-container">
+
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="../images/feza.png" style="width:100%">
+            <button class=" demo-btn">Demo&nbsp; <i class=" fa fa-arrow-right"></i></button>
+            <!-- <div class="text">Caption Text</div> -->
+          </div>
+          
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="../images/mobile.png" style="width:100%">
+            <button class=" demo-btn">Demo&nbsp; <i class=" fa fa-arrow-right"></i></button>
+            <!-- <div class="text">Caption Two</div> -->
+          </div>
+          
+          <div class="mySlides fade">
+            <div class="numbertext"></div>
+            <img src="../images/ur.png" style="width:100%">
+            <button class=" demo-btn">Demo&nbsp; <i class=" fa fa-arrow-right"></i></button>
+            <!-- <div class="text">Caption Three</div> -->
+          </div>
+          
+          <a class="prev" onclick="plusSlides(-1)">❮</a>
+          <a class="next" onclick="plusSlides(1)">❯</a>
+          
+          </div>
+          <br>
+          
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+          </div>
+          
 
     </div>
 
@@ -392,19 +432,19 @@
           <div class="right-one">
         
             <div class="form__div">
-                <input onkeyup="validate()" id="username" type="text" class="form__input" placeholder=" ">
+                <input onkeyup="validate()" onblur="validate()" id="username" type="text" class="form__input" placeholder=" ">
                 <label for="" id="usernamelabel" class="form__label">Your Name*</label>
             </div>
             <span id="usernameError"></span>
 
             <div class="form__div">
-                <input onkeyup="validateEmail()" id="useremail" type="text" class="form__input" placeholder=" ">
+                <input onkeyup="validateEmail()" onblur="validateEmail()" id="useremail" type="text" class="form__input" placeholder=" ">
                 <label for="" id="emaillabel" class="form__label">Your Email*</label>
             </div>
             <span id="emailError"></span>
 
             <div class="form__div textarea-cont">
-                <textarea onkeyup="validateMessage()" id="message"  class="form__input" placeholder=" "></textarea>
+                <textarea onkeyup="validateMessage()" onblur="validateMessage()" id="message"  class="form__input" placeholder=" "></textarea>
                 <label for="" id="messagelabel" class="form__label">Message*</label>
             </div>
             <span id="messageError"></span>
@@ -470,7 +510,7 @@
     </div>
     </div>
     <div class="navbars">
-      <a href="#home" class="active">
+      <a href="#home" class="link-me-p">
         <div class="logo-cont2">
             
         </div>
@@ -569,6 +609,58 @@ document.getElementById("emailError").style.display = "block"
   function hideMenu(){
     document.getElementById("menuBottom").style.display = "none"
   }
+
+
+  let slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+
+function logout(){
+  localStorage.removeItem("loggedInUserEmail");
+ return isLogged();
+}
+
+function isLogged(){
+
+ let email = localStorage.getItem("loggedInUserEmail")
+
+ if(email){
+  document.getElementById("logSign").style.display = "none"
+   document.getElementById("profileauth").style.display = "flex"
+   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
+   return ;
+ }else{
+  document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+ }
+}
+
+window.onload = function(){
+  isLogged()
+}
 
     </script>
 

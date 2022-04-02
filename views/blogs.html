@@ -19,15 +19,31 @@
         <div class="links-cont">
             <a href="./index.html">Home</a>
             <a href="./index.html#aboutme">About me</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#skills">Skills</a>
-            <a href="#contactme">Contact me</a>
+            <a href="./index.html#portfolio">Portfolio</a>
+            <a href="./index.html#skills">Skills</a>
+            <a href="./index.html#contactme">Contact me</a>
             <a href="./blogs.html" class="active-link">Blogs</a>
             <div class="moon">
                 <button><i class="fa-moon uil uil-moon change-theme"></i></button>
             </div>
            <div>
-            <a style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <a id="logSign" style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <div id="profileauth" class="loggedUser">
+              <div class="dropdown  ">
+              <div style="display: flex;">
+                <div class="imggg">
+                  <img src="../images/me.png" alt="">
+                </div>
+                &nbsp;<p style="font-weight: bold;font-style: italic;" id="username-display"></p>
+              </div>
+                
+                <div class="dropdown-content">
+                  <a href="#">Your Profile</a>
+                  <a href="#">Settings</a>
+                <a href="#" onclick="logout()">Logout</a>
+                </div>
+              </div>
+            </div>
            </div>
         </div>
     </div>
@@ -333,7 +349,7 @@
     </div>
     </div>
     <div class="navbars">
-      <a href="#home" class="active">
+      <a href="#home">
         <div class="logo-cont2">
             
         </div>
@@ -368,6 +384,29 @@
     document.getElementById("menuBottom").style.display = "none"
   }
 
+  function logout(){
+  localStorage.removeItem("loggedInUserEmail");
+ return isLogged();
+}
+
+function isLogged(){
+
+ let email = localStorage.getItem("loggedInUserEmail")
+
+ if(email){
+  document.getElementById("logSign").style.display = "none"
+   document.getElementById("profileauth").style.display = "flex"
+   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
+   return ;
+ }else{
+  document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+ }
+}
+
+window.onload = function(){
+  isLogged()
+}
     </script>
 </body>
 </html>

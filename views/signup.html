@@ -13,38 +13,21 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/skills.css">
     <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="../css/blogs.css">
 </head>
 <body>
     <div class="navbar">
         <div class="links-cont">
             <a href="./index.html">Home</a>
             <a href="./index.html#aboutme">About me</a>
-            <a href="./index.html#portfolio">Portfolio</a>
-            <a href="./index.html#skills">Skills</a>
-            <a href="./index.html#contactme">Contact me</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#skills">Skills</a>
+            <a href="#contactme">Contact me</a>
             <a href="./blogs.html">Blogs</a>
             <div class="moon">
                 <button><i class="fa-moon uil uil-moon change-theme"></i></button>
             </div>
            <div>
-            <a id="logSign" style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
-            <div id="profileauth" class="loggedUser">
-              <div class="dropdown  ">
-              <div style="display: flex;">
-                <div class="imggg">
-                  <img src="../images/me.png" alt="">
-                </div>
-                &nbsp;<p style="font-weight: bold;font-style: italic;" id="username-display"></p>
-              </div>
-                
-                <div class="dropdown-content">
-                  <a href="#">Your Profile</a>
-                  <a href="#">Settings</a>
-                <a href="#" onclick="logout()">Logout</a>
-                </div>
-              </div>
-            </div>
+            <a style="text-decoration: none;" href="./admin.blogs.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
            </div>
         </div>
     </div>
@@ -70,9 +53,16 @@
 
     <div class="right-cont form-conts">
 
-        <div class="l-form">
-            <form onsubmit="login(event)" class="form">
-                <h1 class="form__title">Login</h1>
+        <br><div class="l-form">
+            <form onsubmit="signup(event)" class="form">
+                <h1 class="form__title">Sign Up</h1>
+
+
+                <div class="form__div">
+                    <input onkeyup="validateName()" onblur="validateName()" id="username" type="text" class="form__input" placeholder=" ">
+                    <label for="" id="usernamelabel" class="form__label">Username*</label>
+                </div>
+                <span id="usernameError"></span>
 
                 <div class="form__div">
                   <input onkeyup="validateEmail()" onblur="validateEmail()" id="useremail" type="text" class="form__input" placeholder=" ">
@@ -86,13 +76,10 @@
                 </div>
               <span id="passwordError"></span>
 
-              <div id="loginError">
-                <br> <span>*Incorrect email or password*</span><br> <br>
-                 </div>
+                <input onclick="signup(event)" type="submit" class="form__button" value="Sign In">
 
-                <input onclick="login(event)" type="submit" class="form__button" value="Sign In">
+                <p class="dont">Already have an account? <a href="./login.html">Login</a></p>
 
-                <p class="dont">Don't have an account yet? <a href="./signup.html">Signup</a></p>
             </form>
         </div>
 
@@ -152,7 +139,7 @@
       </div>
       </div>
       <div class="navbars">
-        <a href="#home">
+        <a href="#home" class="active">
           <div class="logo-cont2">
               
           </div>
@@ -168,6 +155,8 @@
       </div>
 
     </div>
+
+    <div id="alert" class="alert"><p>Account Created Successfully!</p></div>
 
     <script>
           function menuBottom(){
@@ -229,70 +218,55 @@ document.getElementById("emailError").style.display = "block"
         }
  }
 
- function login(e){
+ function validateName(){
+        let username = document.getElementById("username").value.trim();
+        if(username.length == 0){
+          document.getElementById("usernameError").style.display = "block"
+          document.getElementById("username").style.borderColor="orangered"
+          document.getElementById("usernamelabel").style.color="orangered"
+          document.getElementById("usernameError").innerHTML = "Your name is required*"
+          return false;
+        }
+        if(username.length>0 && username.length<4){
+          document.getElementById("usernameError").style.display = "block"
+          document.getElementById("username").style.borderColor="orangered"
+          document.getElementById("usernamelabel").style.color="orangered"
+          document.getElementById("usernameError").innerHTML = "Your name must be at least 4 characters*"
+       return false;
+        }
+        if(username.length>3){
+          document.getElementById("usernameError").style.display = "none"
+          document.getElementById("username").style.borderColor="forestgreen"
+          document.getElementById("usernamelabel").style.color="forestgreen"
+          document.getElementById("usernameError").innerHTML = ""
+          return true;
+        }
+      }
+
+ function signup(e){
      e.preventDefault();
 
      let isValidEmail = validateEmail();
      let isValidPassword = validatePassword();
-     
-     if(isValidEmail == true && isValidPassword == true){
-    document.getElementById("loginError").style.display = "none";
-    let email = document.getElementById("useremail").value.trim();
-    let password = document.getElementById("password").value;
+     let isValidName = validateName();
 
-       if(email == "emmanuel@gmail.com" && password=="rca.ac.rw"){
-         return window.location = "./admin.blogs.html";
-       }
-       loginUser();
+    let email = document.getElementById("useremail").value.trim();
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value;
+     
+     if(isValidEmail == true && isValidPassword == true && isValidName == true){
+        localStorage.setItem("email", email)
+        localStorage.setItem("username", username)
+        localStorage.setItem("password", password)
+
+        document.getElementById("alert").style.display="block"
+
+        setTimeout(()=>{
+            window.location = "./blogs.html"
+        },1500)
      }
  }
 
- function loginUser(){
-  document.getElementById("loginError").style.display = "none";
-
-let isValidEmail = validateEmail();
-let isValidPassword = validatePassword();
-
-if(isValidEmail == true && isValidPassword == true){
-
-  let emails = localStorage.getItem("email")
-  let pass = localStorage.getItem("password");
-  let email = document.getElementById("useremail").value.trim();
-  let password = document.getElementById("password").value;
-
-  if(emails == email && pass == password){
-   localStorage.setItem("loggedInUserEmail", localStorage.getItem("email"))
-   isLogged();
-  }
-  if(emails != email || pass != password){
-     return document.getElementById("loginError").style.display = "flex";
-  }
-}
-}
-
-function logout(){
-  localStorage.removeItem("loggedInUserEmail");
- return isLogged();
-}
-
-function isLogged(){
-
- let email = localStorage.getItem("loggedInUserEmail")
-
- if(email){
-  document.getElementById("logSign").style.display = "none"
-   document.getElementById("profileauth").style.display = "flex"
-   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
-   return ;
- }else{
-  document.getElementById("logSign").style.display = "block"
-   document.getElementById("profileauth").style.display = "none"
- }
-}
-
-window.onload = function(){
-  isLogged()
-}
     </script>
 </body>
 </html>

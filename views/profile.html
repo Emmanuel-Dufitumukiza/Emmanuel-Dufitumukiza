@@ -19,7 +19,7 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
 
-            <h3 class="page-title">Post Blog</h3>
+            <h3 class="page-title">Your Profile</h3>
 
             <div class="header__img">
                 <img src="../images/me.png" alt="">
@@ -33,8 +33,7 @@
                         <i class='bx bx-layer nav__logo-icon'></i>
                         <span class="nav__logo-name">Emmanuel</span>
                     </a>
-                    
-                    <br><br>
+<br><br>
                     <div class="nav__list">
                         <!-- <a href="#" class="nav__link">
                         <i class='bx bx-grid-alt nav__icon' ></i>
@@ -56,12 +55,12 @@
                             <span class="nav__name">Blogs</span>
                         </a>
 
-                        <a href="./addBlog.html" class="nav__link active">
+                        <a href="./addBlog.html" class="nav__link">
                             <i class='bx bx-folder nav__icon' ></i>
                             <span class="nav__name">Add Blog</span>
                         </a>
 
-                        <a href="./profile.html" class="nav__link">
+                        <a href="./profile.html" class="nav__link active">
                             <i class='fa fa-user nav__icon' ></i>
                             <span class="nav__name">Profile</span>
                         </a>
@@ -76,29 +75,56 @@
         </div>
 
       <div class="blogs">
-        <br><br>
-        <!-- <h4>Add Blog</h4> -->
+          <br><h4 id="myInfo" class="user-name">Emmanuel Dufitumukiza &nbsp; &nbsp; <button onclick="edit()"><i class="fa fa-edit"></i></button></h4>
+       <div id="edit-inp" class="edit-inp">
+           <label for="">Enter a new username</label>
+        <input type="text" name="" id="" value="Emmanuel-Dufitumukiza">
+        <button class="editBtn">Save</button>
+        <button class="moreBtn" onclick="cancel()">Cancel</button>
+       </div>
+          <div class="profile-page">
+            <img id="preview" src="../images/pic.jpg" alt="">
+        </div>
 
-        <!-- <div class="form-cont"> -->
-            <div class="container-d">
-                <h3>POST A BLOG
-                </h3>
-             <div id="editor">
-                 <p></p>
-             </div>
-            <!-- </div> -->
-             
-            <button class="post-blog btn sendbtn">Post Blog</button>
+        <br><br><div class="btns-act-cont">
+            <input style="display: none;" id="up" type="file" accept="image/*" onchange="previewImage(event)">
+            <button class="editBtn" onclick="upload()">Edit Profile</button> &nbsp;
+        <button class="moreBtn" style="background-color: crimson;color: white;">Remove Profile</button>
+        </div>
         </div>
 
       </div>
 
       <script>
+
+function upload(){
+    document.getElementById("up").click()
+}
+
         ClassicEditor
             .create( document.querySelector( '#editor' ) )
             .catch( error => {
                 console.error( error );
             } );
+
+            const previewImage = e => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+         const preview = document.getElementById('preview');
+         preview.src = reader.result;
+      };
+   };
+
+   function edit(){
+       document.getElementById("myInfo").style.display="none"
+       document.getElementById("edit-inp").style.display = "block"
+   }
+
+   function cancel(){
+       document.getElementById("edit-inp").style.display = "none"
+       document.getElementById("myInfo").style.display="block"
+   }
     </script>
     </body>
 </html>

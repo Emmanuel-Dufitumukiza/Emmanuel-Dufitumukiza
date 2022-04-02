@@ -19,15 +19,32 @@
         <div class="links-cont">
             <a href="./index.html">Home</a>
             <a href="./index.html#aboutme">About me</a>
-            <a href="#portfolio">Portfolio</a>
-            <a href="#skills">Skills</a>
-            <a href="#contactme">Contact me</a>
+            <a href="./index.html#portfolio">Portfolio</a>
+            <a href="./index.html#skills">Skills</a>
+            <a href="./index.html#contactme">Contact me</a>
             <a href="./blogs.html" class="active-link">Blogs</a>
             <div class="moon">
                 <button><i class="fa-moon uil uil-moon change-theme"></i></button>
             </div>
            <div>
-            <a style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <a id="logSign" style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <div id="profileauth" class="loggedUser">
+              <div class="dropdown  ">
+              <div style="display: flex;">
+                <div class="imggg">
+                  <img src="../images/me.png" alt="">
+                </div>
+                &nbsp;<p style="font-weight: bold;font-style: italic;" id="username-display"></p>
+              </div>
+                
+                <div class="dropdown-content">
+                  <a href="#">Your Profile</a>
+                  <a href="#">Settings</a>
+                <a href="#" onclick="logout()">Logout</a>
+                </div>
+              </div>
+            </div>
+
            </div>
         </div>
     </div>
@@ -121,13 +138,69 @@
 
             <div class="comment-area">
                 <div class="form__div textarea-cont form__div2">
-                    <textarea  class="form__input commentinput" placeholder=" "></textarea>
-                    <label for="" class="form__label">Write your comment</label>
+                  <textarea id="message" onkeyup="validateMessage()" onblur="validateMessage()" class="form__input commentinput" placeholder=" "></textarea>
+                  <label for="" id="messagelabel" class="form__label">Write your comment</label>
+                  <p id="messageError2"></p>
                 </div>
+
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <div class="commentBtn">
-                    <button class="addcommentbtn"><i class="fa-solid fa-comment"></i> Add Comment</button>
+                    <button onclick="login()" class="addcommentbtn"><i class="fa-solid fa-comment"></i> Add Comment</button>
                 </div>
+            </div>
+
+            <div class="comments-section">
+              <div class="header-title">
+                <h4>All Comments (4) <button id="showIc" onclick="toggleComments()"><i class="fa fa-angle-right"></i></button> <button id="hideIc" onclick="hideComments()"><i class="fa fa-angle-right"></i></button> </h4>
+              </div>
+
+              <div id="allComments">
+             <div class="comment-one">
+               <div class="profile-commenter">
+                 <img src="../images/pic.jpg" alt="">
+               </div>
+
+               <div class="user-info">
+                 <p style="font-weight: bold;">Manzi James</p>
+                 <p style="position: relative;top: -12px;">I liked your article, I like javascript as my favorite language keep up, may be goood to add videos in your article next time.</p>
+               </div>
+             </div>
+
+             <div class="comment-one">
+              <div class="profile-commenter">
+                <img src="../images/me.png" alt="">
+              </div>
+
+              <div class="user-info">
+                <p style="font-weight: bold;">Manzi James</p>
+                <p style="position: relative;top: -12px;">I liked your article, I like javascript as my favorite language keep up, may be goood to add videos in your article next time.</p>
+              </div>
+            </div>
+
+
+            <div class="comment-one">
+              <div class="profile-commenter">
+                <img src="../images/pic.jpg" alt="">
+              </div>
+
+              <div class="user-info">
+                <p style="font-weight: bold;">Manzi James</p>
+                <p style="position: relative;top: -12px;">I liked your article, I like javascript as my favorite language keep up, may be goood to add videos in your article next time.</p>
+              </div>
+            </div>
+
+
+            <div class="comment-one">
+              <div class="profile-commenter">
+                <img src="../images/me.png" alt="">
+              </div>
+
+              <div class="user-info">
+                <p style="font-weight: bold;">Manzi James</p>
+                <p style="position: relative;top: -12px;">I liked your article, I like javascript as my favorite language keep up, may be goood to add videos in your article next time.</p>
+              </div>
+            </div>
+          </div>
             </div>
 
         </div>
@@ -185,7 +258,7 @@
       </div>
       </div>
       <div class="navbars">
-        <a href="#home" class="active">
+        <a href="#home">
           <div class="logo-cont2">
               
           </div>
@@ -201,15 +274,194 @@
       </div>
     </div>
 
+    <div class="login-modal" id="mymodalcont">
+      <div class="l-form login-user-form" id="login-modal">
+        <form onsubmit="loginUser(event)" class="form">
+            <h1 class="form__title">Login</h1>
+
+            <div class="form__div">
+              <input onkeyup="validateEmail()" onblur="validateEmail()" id="useremail" type="text" class="form__input" placeholder=" ">
+              <label for="" id="emaillabel" class="form__label">Your Email*</label>
+          </div>
+          <span id="emailError"></span>
+
+            <div class="form__div">
+                <input onblur="validatePassword()" onkeyup="validatePassword()" id="password" type="password" class="form__input" placeholder=" ">
+                <label for="" id="passwordLabel" class="form__label">Password</label>
+            </div>
+          <span id="passwordError"></span>
+
+          <div id="loginError">
+         <span>*Incorrect email or password*</span><br>
+          </div>
+
+            <input onclick="loginUser(event)" type="submit" class="form__button" value="Sign In">
+
+            <p class="dont">Don't have an account yet? <a href="./signup.html">Signup</a></p>
+        </form>
+    </div>
+    </div>
+
     <script>
           function menuBottom(){
     document.getElementById("menuBottom").style.display = "block"
   }
 
+  function validateEmail(){
+    let email = document.getElementById("useremail").value.trim();
+    document.getElementById("loginError").style.display = "none";
+
+    if(email.length == 0){
+      document.getElementById("emailError").style.display = "block"
+      document.getElementById("useremail").style.borderColor="orangered"
+      document.getElementById("emaillabel").style.color="orangered"
+      document.getElementById("emailError").innerHTML = "Email is required*"
+      return false;
+    }
+
+    if(email.length>0){
+
+
+if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+{
+      document.getElementById("emailError").style.display = "none"
+      document.getElementById("useremail").style.borderColor="forestgreen"
+      document.getElementById("emaillabel").style.color="forestgreen"
+      document.getElementById("emailError").innerHTML = ""
+      return true;
+}
+document.getElementById("emailError").style.display = "block"
+      document.getElementById("useremail").style.borderColor="orangered"
+      document.getElementById("emaillabel").style.color="orangered"
+      document.getElementById("emailError").innerHTML = "Invalid Email address format"
+      return false;
+    }
+  }
+
+  function validatePassword(){
+  document.getElementById("loginError").style.display = "none";
+  let password = document.getElementById("password").value;
+
+        if(password.length == 0){
+          document.getElementById("passwordError").style.display = "block"
+          document.getElementById("password").style.borderColor="orangered"
+          document.getElementById("passwordLabel").style.color="orangered"
+          document.getElementById("passwordError").innerHTML = "Password is required*"
+      return false;
+        }
+        if(password.length>0){
+          document.getElementById("passwordError").style.display = "none"
+          document.getElementById("password").style.borderColor="forestgreen"
+          document.getElementById("passwordLabel").style.color="forestgreen"
+          document.getElementById("passwordError").innerHTML = ""
+      return true;
+        }
+ }
   
   function hideMenu(){
     document.getElementById("menuBottom").style.display = "none"
   }
+
+  var modal = document.getElementById('login-modal');
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        document.getElementById("mymodalcont").style.display = "none";
+    }
+}
+
+function login(){
+  if(localStorage.getItem("loggedInUserEmail")?.trim() == null){
+    document.getElementById("mymodalcont").style.display = "block"
+    modal.style.display = "flex";
+    return ;
+  }
+
+  validateMessage()
+}
+
+function validateMessage(){
+  let message = document.getElementById("message").value.trim();
+
+  if(message.length == 0){
+      document.getElementById("messageError2").style.display = "block"
+      document.getElementById("message").style.borderColor="orangered"
+      document.getElementById("messagelabel").style.color="orangered"
+      document.getElementById("messageError2").innerHTML = "Message is required*"
+      return ;
+    }
+    if(message.length>0){
+      document.getElementById("messageError2").style.display = "none"
+      document.getElementById("message").style.borderColor="forestgreen"
+      document.getElementById("messagelabel").style.color="forestgreen"
+      document.getElementById("messageError2").innerHTML = ""
+      return ;
+    }
+}
+
+function loginUser(e){
+  e.preventDefault();
+  document.getElementById("loginError").style.display = "none";
+
+let isValidEmail = validateEmail();
+let isValidPassword = validatePassword();
+
+if(isValidEmail == true && isValidPassword == true){
+
+  let emails = localStorage.getItem("email")
+  let pass = localStorage.getItem("password");
+  let email = document.getElementById("useremail").value.trim();
+  let password = document.getElementById("password").value;
+
+  if(emails == email && pass == password){
+   localStorage.setItem("loggedInUserEmail", localStorage.getItem("email"))
+   modal.style.display = "none";
+   document.getElementById("mymodalcont").style.display = "none"
+   isLogged();
+  }
+  if(emails != email || pass != password){
+     return document.getElementById("loginError").style.display = "flex";
+  }
+}
+}
+
+function logout(){
+  localStorage.removeItem("loggedInUserEmail");
+ return isLogged();
+}
+
+function isLogged(){
+
+ let email = localStorage.getItem("loggedInUserEmail")
+
+ if(email){
+  document.getElementById("logSign").style.display = "none"
+   document.getElementById("profileauth").style.display = "flex"
+   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
+   return ;
+ }else{
+  document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+ }
+}
+
+window.onload = function(){
+  isLogged()
+}
+
+function toggleComments(){
+  document.getElementById("allComments").style.display = "block"
+  document.getElementById("showIc").style.display = "none"
+  document.getElementById("hideIc").style.display = "inline"
+}
+
+function hideComments(){
+  document.getElementById("allComments").style.display = "none"
+  document.getElementById("showIc").style.display = "inline"
+  document.getElementById("hideIc").style.display = "none"
+}
+
     </script>
 
 </body>
