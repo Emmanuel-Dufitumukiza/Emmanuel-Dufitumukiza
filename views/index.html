@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="../css/skills.css">
     <link rel="stylesheet" href="../css/blogs.css">
+    <link rel="stylesheet" href="../css/alert.css">
 </head>
 <body>
     <div class="navbar">
@@ -525,6 +526,8 @@
     </div>
     </div>
 
+    <div id="alert" class="alert"><p>Your Message Has Been Sent Successfully!</p></div>
+
     <script>
       function validate(){
         let username = document.getElementById("username").value.trim();
@@ -536,18 +539,21 @@
           document.getElementById("username").style.borderColor="orangered"
           document.getElementById("usernamelabel").style.color="orangered"
           document.getElementById("usernameError").innerHTML = "Your name is required*"
+          return false;
         }
         if(username.length>0 && username.length<4){
           document.getElementById("usernameError").style.display = "block"
           document.getElementById("username").style.borderColor="orangered"
           document.getElementById("usernamelabel").style.color="orangered"
           document.getElementById("usernameError").innerHTML = "Your name must be at least 4 characters*"
+          return false;
         }
         if(username.length>3){
           document.getElementById("usernameError").style.display = "none"
           document.getElementById("username").style.borderColor="forestgreen"
           document.getElementById("usernamelabel").style.color="forestgreen"
           document.getElementById("usernameError").innerHTML = ""
+          return true;
         }
       }
 
@@ -559,12 +565,14 @@
       document.getElementById("message").style.borderColor="orangered"
       document.getElementById("messagelabel").style.color="orangered"
       document.getElementById("messageError").innerHTML = "Message is required*"
+      return false;
     }
     if(message.length>0){
       document.getElementById("messageError").style.display = "none"
       document.getElementById("message").style.borderColor="forestgreen"
       document.getElementById("messagelabel").style.color="forestgreen"
       document.getElementById("messageError").innerHTML = ""
+      return true;
     }
   }
 
@@ -576,6 +584,7 @@
       document.getElementById("useremail").style.borderColor="orangered"
       document.getElementById("emaillabel").style.color="orangered"
       document.getElementById("emailError").innerHTML = "Email is required*"
+      return false;
     }
     if(email.length>0){
 
@@ -592,13 +601,46 @@ document.getElementById("emailError").style.display = "block"
       document.getElementById("useremail").style.borderColor="orangered"
       document.getElementById("emaillabel").style.color="orangered"
       document.getElementById("emailError").innerHTML = "Invalid Email address format"
+      return false;
     }
   }
 
   function validateAll(){
-    validate();
-    validateMessage();
-    validateEmail();
+    let res = validate();
+    let res2 = validateMessage();
+    let res3 = validateEmail();
+
+    if(res == true && res2 == true && res3 == true){
+
+      let username = document.getElementById("username").value.trim();
+        let email = document.getElementById("useremail").value.trim();
+        let message = document.getElementById("message").value.trim();
+
+      fetch("http://localhost:8000/api/sendMessage", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    names: username,
+                    email: email,
+                    message: message
+                })
+            }).then((res) => {
+              console.log(res)
+            })
+            .then((data) => {
+              document.getElementById("alert").style.display = "block"
+              document.getElementById("username").value = ""
+        document.getElementById("useremail").value = ""
+        document.getElementById("message").value = ""
+
+              setTimeout(()=>{
+                document.getElementById("alert").style.display = "none"
+              },2500)
+            })
+            .catch((err) => console.log(err))
+    }
   }
 
   function menuBottom(){

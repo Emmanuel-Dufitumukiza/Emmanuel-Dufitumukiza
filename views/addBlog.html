@@ -80,16 +80,32 @@
         <!-- <h4>Add Blog</h4> -->
 
         <!-- <div class="form-cont"> -->
-            <div class="container-d">
-                <h3>POST A BLOG
-                </h3>
-             <div id="editor">
-                 <p></p>
-             </div>
-            <!-- </div> -->
-             
-            <button class="post-blog btn sendbtn">Post Blog</button>
-        </div>
+
+            <div class="container form-c-cont-b">
+                <form method="POST" onsubmit="postBlog(event)">
+                  <label for="fname">Blog Title</label>
+                  <input type="text" id="fname" name="firstname" placeholder="Blog title..">
+              <br>
+                  <label for="subject">Text</label>
+                  <textarea id="subject" name="subject" placeholder="Write a blog.." style="height:200px"></textarea>
+              
+                  <input onchange="previewImage(event)" type="file" style="display: none;" id="file-img">
+                  
+                  <div class="up-b">
+                    <label for="file-img" class="upload">
+                        Upload Image
+                      </label>
+                  </div>
+
+                  <div class="profile-page img-blo">
+                    <img id="preview" src="" alt="">
+                </div>
+
+                  <input onclick="postBlog(event)" type="submit" value="Create blog">
+                </form>
+              </div>
+        
+        <!-- <button class="post-blog btn sendbtn">Post Blog</button> -->
 
       </div>
 
@@ -99,6 +115,72 @@
             .catch( error => {
                 console.error( error );
             } );
+
+            const previewImage = e => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+         const preview = document.getElementById('preview');
+         preview.src = reader.result;
+         document.getElementsByClassName("img-blo")[0].style.display = "block"
+      };
+   };
+
+   function postBlog(e){
+    e.preventDefault();
+let title = document.getElementById("fname").value?.trim();
+let text = document.getElementById("subject").value?.trim();
+let img = document.getElementById('preview').src;
+
+if(title && text && img){
+    let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/duldhdjsj/image/upload';
+
+    let data = {
+                "file": img,
+                "upload_preset": "s1ef0r8m",
+            }
+
+    fetch(CLOUDINARY_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((res) => res.json())
+            .then((data) =>{
+                let info = {
+                    title: title,
+                    text: text,
+                    fileUrl: data?.url,
+                    filePublicId: data?.public_id
+                }
+
+                console.log(info)
+
+                fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/new", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjU4NGExNmEyZjRjZTUzNGE4YWU3OGYiLCJpYXQiOjE2NTA2NDY3Mzd9.xzVXejKeL4maU3pI2AEZyclRKo-606MVytsVe5UpcLI"
+                },
+                body: JSON.stringify(info)
+            }).then((res) => res.json())
+            .then((data) =>{
+            console.log(data)
+            })
+            .catch((error)=>{
+        console.log(error.message)
+    })
+
+
+            })
+    .catch((error)=>{
+        console.log(error)
+    })
+
+}
+   }
+
     </script>
     </body>
 </html>
