@@ -240,9 +240,9 @@ document.getElementById("emailError").style.display = "block"
     let email = document.getElementById("useremail").value.trim();
     let password = document.getElementById("password").value;
 
-       if(email == "emmanuel@gmail.com" && password=="rca.ac.rw"){
-         return window.location = "./admin.blogs.html";
-       }
+      //  if(email == "emmanuel@gmail.com" && password=="rca.ac.rw"){
+        //  return window.location = "./admin.blogs.html";
+      //  }
        loginUser();
      }
  }
@@ -255,43 +255,76 @@ let isValidPassword = validatePassword();
 
 if(isValidEmail == true && isValidPassword == true){
 
-  let emails = localStorage.getItem("email")
-  let pass = localStorage.getItem("password");
-  let email = document.getElementById("useremail").value.trim();
-  let password = document.getElementById("password").value;
+  let emails = document.getElementById("useremail").value.trim();
+  let pass = document.getElementById("password").value;
 
-  if(emails == email && pass == password){
-   localStorage.setItem("loggedInUserEmail", localStorage.getItem("email"))
-   isLogged();
-  }
-  if(emails != email || pass != password){
-     return document.getElementById("loginError").style.display = "flex";
-  }
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emails,
+                    password: pass
+                })
+            }).then((res) => res.json())
+            .then((data) =>{
+            if(data.error){
+             return document.getElementById("loginError").style.display = "flex";
+            }else{
+              document.getElementById("loginError").style.display = "none";
+              localStorage.setItem("token", data.token);
+              if(data.user.role == "padmin"){
+                return window.location = "./admin.blogs.html";
+              }
+
+            return isLogged(data.user.username);
+            }
+            })
+            .catch((error)=>{
+              console.log(error)
+            })
 }
 }
 
 function logout(){
-  localStorage.removeItem("loggedInUserEmail");
+  localStorage.removeItem("token");
  return isLogged();
 }
 
-function isLogged(){
+function isLogged(username){
 
- let email = localStorage.getItem("loggedInUserEmail")
+ let token = localStorage.getItem("token")
 
- if(email){
-  document.getElementById("logSign").style.display = "none"
+ if(token){
+
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+    method: 'GET',
+    headers: {
+        'Authorization': token
+    }
+  })
+  .then((res) => res.json())
+    .then((res) =>{
+      if(res.username){
+        document.getElementById("logSign").style.display = "none"
    document.getElementById("profileauth").style.display = "flex"
-   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
+   document.getElementById("username-display").innerHTML  = res.username;
+   window.location = "./blogs.html"
    return ;
- }else{
+      }else{
+        document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+      }
+    });
+ }if(!token){
   document.getElementById("logSign").style.display = "block"
    document.getElementById("profileauth").style.display = "none"
  }
 }
 
 window.onload = function(){
-  isLogged()
+  isLogged('')
 }
     </script>
 </body>

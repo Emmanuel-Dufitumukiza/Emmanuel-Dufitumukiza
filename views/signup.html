@@ -69,6 +69,7 @@
                   <label for="" id="emaillabel" class="form__label">Your Email*</label>
               </div>
               <span id="emailError"></span>
+              <span id="accError"></span>
 
                 <div class="form__div">
                     <input onblur="validatePassword()" onkeyup="validatePassword()" id="password" type="password" class="form__input" placeholder=" ">
@@ -195,6 +196,7 @@ document.getElementById("emailError").style.display = "block"
       document.getElementById("useremail").style.borderColor="orangered"
       document.getElementById("emaillabel").style.color="orangered"
       document.getElementById("emailError").innerHTML = "Invalid Email address format"
+
       return false;
     }
   }
@@ -255,16 +257,39 @@ document.getElementById("emailError").style.display = "block"
     let password = document.getElementById("password").value;
      
      if(isValidEmail == true && isValidPassword == true && isValidName == true){
-        localStorage.setItem("email", email)
-        localStorage.setItem("username", username)
-        localStorage.setItem("password", password)
+     createAccount(username, email,password)
+        // document.getElementById("alert").style.display="block"
 
-        document.getElementById("alert").style.display="block"
-
-        setTimeout(()=>{
-            window.location = "./blogs.html"
-        },1500)
+        // setTimeout(()=>{
+        //     window.location = "./blogs.html"
+        // },1500)
      }
+ }
+
+ function createAccount(username, email,password){
+
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/register", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  username: username,
+                  email: email,
+                  password: password
+                })
+            }).then((res) => res.json())
+            .then((data) =>{
+            if(data.message == "Email had already taken, please try different email address"){
+              document.getElementById("emailError").style.display ="block"
+           return document.getElementById("emailError").innerHTML = data.message
+            }
+
+            localStorage.setItem("token", data.token);
+
+            window.location = "./blogs.html";
+            
+    });
  }
 
     </script>

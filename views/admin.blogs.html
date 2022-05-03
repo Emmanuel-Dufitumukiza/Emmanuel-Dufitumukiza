@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <a href="./index.html" class="nav__link">
+                <a onclick="logout()" class="nav__link">
                     <i class='bx bx-log-out nav__icon' ></i>
                     <span class="nav__name">Log Out</span>
                 </a>
@@ -75,221 +75,11 @@
         </div>
 
       <div class="blogs">
-        <br><h4>All Blogs</h4>
+        <br><h4>All Blogs (<span id="totals"></span>)</h4>
 
+<div id="blogsCntainer">
 
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
-
-        <div class="blog-cont">
-            <div class="blog-desc d-flex">
-               <div class="blog-img-cont">
-                   <img src="../images/blog.png" alt="">
-               </div>
-               <div class="linkss">
-                <p><b>Title: </b> <span>JavaScript Tutorial</span></p>
-                <p><b>Likes: </b> <span>56</span></p>
-                <p><b>Comments: </b> <span>120</span></p>
-                <p><b>Date: </b> <span>6/march/2022</span></p>
-               </div>
-            </div>
-
-            <div class="btns-cont">
-                <button class="editBtn"><i class="fa fa-edit"></i> Edit</button>
-                <button class="moreBtn"><i class="fa fa-more"></i> Delete</button>
-                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
-            </div>
-
-        </div>
+</div>
 
       </div>
 
@@ -312,7 +102,8 @@
         </div>
     </div>
 
-    <div id="alert" class="alert"><p>Blog Deleted Successfully!</p></div>
+    <div id="alert" class="alert delAlert"><p>Blog Deleted Successfully!</p></div>
+    <p style="display: none;" id="blogIds"></p>
 
       <script>
     let blogs = document.getElementsByClassName("editBtn");
@@ -326,13 +117,15 @@ for(let i=0; i<blogs.length; i++){
 let deletes = document.getElementsByClassName("moreBtn");
 let modal = document.getElementById("modal")
 
-for(let i=0; i<deletes.length; i++){
-    deletes[i].addEventListener("click", (e)=>{
-        modal.style.display = "flex"
-  })
+// for(let i=0; i<deletes.length; i++){
+//     deletes[i].addEventListener("click", (e)=>{
+//   })
+// }
+
+function openModal(id){
+    document.getElementById("blogIds").innerHTML = id;
+    modal.style.display = "flex"
 }
-
-
 
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -342,13 +135,89 @@ window.onclick = function(event) {
 
 }
 function deleteBlog(){
+    let id = document.getElementById("blogIds").innerHTML;
+
+    let token = localStorage.getItem("token");
+
+    if(token){
+            
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/delete/"+id, {
+    method: 'DELETE',
+    headers: {
+        'Authorization': token
+    }
+  })
+  .then((res) => res)
+    .then((res) =>{
+   if(res.status == 200){
     document.getElementById("alert").style.display="block"
     document.getElementById("modal").style.display = "none";
+  getBlogs()
+   }else{
+    return window.location = "./login.html"
+   }
+    })
+    .catch((error)=>{
+        document.getElementById("modal").style.display = "none";
+        alert(error.message)
+    })
+
+    }else{
+        return logout();
+    }
 
     setTimeout(()=>{
     document.getElementById("alert").style.display="none"
     },1500)
 }
+
+window.onload = function(){
+    let token = localStorage.getItem("token")
+    if(!token){
+        logout();
+    }
+  getBlogs()
+}
+
+function getBlogs(){
+    document.getElementById("blogsCntainer").innerHTML = "";
+    fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs", {
+    method: 'GET'
+  })
+  .then((res) => res.json())
+    .then((blogs) =>{
+        document.getElementById("totals").innerHTML = blogs.length;
+          for(let i=0; i<blogs.length; i++){
+           document.getElementById("blogsCntainer").innerHTML += `
+           <div class="blog-cont">
+            <div class="blog-desc d-flex">
+               <div class="blog-img-cont">
+                   <img src="${blogs[i]?.fileUrl}" style="border-radius: 4px;" alt="">
+               </div>
+               <div class="linkss">
+                <p><b>Title: </b> <span>${blogs[i]?.title}</span></p>
+                <p><b>Likes: </b> <span>${blogs[i]?.likes?.length}</span></p>
+                <p><b>Comments: </b> <span>${blogs[i]?.comments?.length}</span></p>
+                <p><b>Date: </b> <span>${new Date(blogs[i]?.createdAt).toLocaleDateString()}</span></p>
+               </div>
+            </div>
+
+            <div class="btns-cont">
+                <button class="editBtn" onclick="window.location='./editBlog.html?id=${blogs[i]?._id}'"><i class="fa fa-edit"></i> Edit</button>
+                <button class="moreBtn" onclick="openModal('${blogs[i]?._id}')"><i class="fa fa-more"></i> Deletes</button>
+                <button class="dotsBtn"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+            </div>
+        </div>
+           `
+          }
+    })
+}
+
+function logout(){
+    localStorage.removeItem("token");
+    return  window.location = "./login.html"
+}
+
       </script>
     </body>
 </html>

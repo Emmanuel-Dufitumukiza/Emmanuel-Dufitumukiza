@@ -9,9 +9,9 @@
         <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script>
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../css/admin.css">
-        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script> -->
 
-        <title>Add Blog</title>
+        <title>Edit Blog</title>
     </head>
     <body class="body-pd" id="body-pd">
         <header class="header body-pd" id="header">
@@ -19,7 +19,7 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
 
-            <h3 class="page-title">Post Blog</h3>
+            <h3 class="page-title">Edit Blog</h3>
 
             <div class="header__img">
                 <img src="../images/me.png" alt="">
@@ -76,47 +76,176 @@
         </div>
 
       <div class="blogs">
+        <br><br>
         <!-- <h4>Add Blog</h4> -->
 
         <!-- <div class="form-cont"> -->
-            <br><br><div class="container-d conts-ed">
-                <h3>POST A BLOG
-                </h3>
-             <div id="editor">
-                 <p>
-                    
-                    JavaScript Is one of the most popular used Programming languages JavaScript Is
-                     one of the most popular used Programming languages JavaScript Is one of the most
-                      popular used Programming languages JavaScript Is one of the most popular used 
-                      Programming languages JavaScript Is one of the most popular
-                       https://www.youtube/javascriptutotial/watch/ds.com used Programming languages JavaScript Is
-                        one of the most popular used Programming languages JavaScript Is one of the most popular
-                         used Programming languages JavaScript Is 
-                    one of the most popular 
-                    used Programming languages JavaScript Is one of the most popular used Programming languages
-                     JavaScript Is one of the most popular used Programming languages JavaScript Is one of the most
-                      popular used Programming languages JavaScript Is one of the most popular used Programming
-                       languages JavaScript Is one of the most popular used Programming languages JavaScript Is
-                        one of the most popular used Programming languages JavaScript Is one of the most popular 
-                        used Programming languages JavaScript Is one of the most popular
-                         https://www.youtube/javascriptutotial/watch/ds.com used Programming
-                          languages JavaScript Is one of the most popular used Programming languages JavaScript Is one 
-                    of the most popular used Programming languages JavaScript Is one of the most popula
-                 </p>
-             </div>
-            <!-- </div> -->
-            <button class="post-blog btn sendbtn">Save Changes</button>
-            <br><br>
-        </div>
+
+            <div class="container form-c-cont-b">
+                <form method="POST" onsubmit="postBlog(event)">
+                  <label for="fname">Blog Title</label>
+                  <input type="text" id="fname" name="firstname" placeholder="Blog title..">
+              <br>
+                  <!-- <label for="subject">Text</label>
+                  <textarea id="subject" name="subject" placeholder="Write a blog.." style="height:200px"></textarea> -->
+              
+
+                  <div class="editor-cont">
+                    <div class="navbars">
+                    <button onclick="addCode()" type="button" class="codeBtn"><i class="fa fa-code"></i></button>
+                    </div>
+                      <div class="editor" id="editor" contenteditable="true">
+                
+                      </div>
+                    </div>
+
+                  <input onchange="previewImage(event)" type="file" style="display: none;" id="file-img">
+                  
+                  <div class="up-b">
+                    <label for="file-img" class="upload">
+                        Upload Image
+                      </label>
+                  </div>
+
+                  <div class="profile-page img-blo">
+                    <img id="preview" src="" alt="">
+                </div>
+
+                  <input onclick="postBlog(event)" type="submit" value="Create blog">
+                </form>
+              </div>
+        
+        <!-- <button class="post-blog btn sendbtn">Post Blog</button> -->
 
       </div>
 
       <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+
+function addCode(){
+            document.getElementById("editor").innerHTML += "```<br><br>```"
+        }
+
+            const previewImage = e => {
+      const reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+         const preview = document.getElementById('preview');
+         preview.src = reader.result;
+         document.getElementsByClassName("img-blo")[0].style.display = "block"
+      };
+   };
+
+   function postBlog(e){
+    e.preventDefault();
+let title = document.getElementById("fname").value?.trim();
+let text = document.getElementById("editor").innerHTML?.trim();
+let img = document.getElementById('preview').src;
+let url = window.location.href;
+  let arrs = url.split("=");
+  let id = arrs[1];
+  
+if(title && text && img){
+    
+    let imgs =localStorage.getItem("file");
+
+    if(imgs.toString() != img.toString()){
+        let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/duldhdjsj/image/upload';
+
+let data = {
+            "file": img,
+            "upload_preset": "s1ef0r8m",
+        }
+
+fetch(CLOUDINARY_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then((res) => res.json())
+        .then((data) =>{
+            let info = {
+                title: title,
+                text: text,
+                fileUrl: data?.url,
+                filePublicId: data?.public_id
+            }
+
+            console.log(info)
+    let token = localStorage.getItem("token");
+
+            fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/"+id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(info)
+        }).then((res) => res.json())
+        .then((data) =>{
+        console.log(data)
+       return window.location  ="./admin.blogs.html"
+        })
+        .catch((error)=>{
+    console.log(error.message)
+})
+        })
+.catch((error)=>{
+    console.log(error)
+})
+return ;
+    }
+
+    let token = localStorage.getItem("token");
+    let publicId = localStorage.getItem("publicId");
+
+    let info = {
+                title: title,
+                text: text,
+                fileUrl: img,
+                filePublicId: publicId
+            }
+
+            console.log(info)
+
+            fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/"+id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(info)
+        }).then((res) => res.json())
+        .then((data) =>{
+        console.log(data)
+       return window.location  ="./admin.blogs.html"
+        })
+
+}
+   }
+
+   window.onload = ()=>{
+
+    let url = window.location.href;
+  let arrs = url.split("=");
+  let id = arrs[1];
+
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/"+id, {
+    method: 'GET'
+  })
+  .then((res) => res.json())  
+    .then((blog) =>{
+        document.getElementById("fname").value = blog?.title;
+        document.getElementById("editor").innerHTML = blog?.text;
+document.getElementById('preview').src = blog.fileUrl;
+if(blog?.fileUrl){
+localStorage.setItem("file", blog.fileUrl);
+localStorage.setItem("publicId", blog.publicId);
+}
+document.getElementsByClassName("img-blo")[0].style.display = "block"
+    });
+   }
+
     </script>
     </body>
 </html>

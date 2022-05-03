@@ -9,7 +9,7 @@
         <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script>
         <!-- ===== CSS ===== -->
         <link rel="stylesheet" href="../css/admin.css">
-        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+        <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script> -->
 
         <title>Add Blog</title>
     </head>
@@ -86,9 +86,19 @@
                   <label for="fname">Blog Title</label>
                   <input type="text" id="fname" name="firstname" placeholder="Blog title..">
               <br>
-                  <label for="subject">Text</label>
-                  <textarea id="subject" name="subject" placeholder="Write a blog.." style="height:200px"></textarea>
+                  <!-- <label for="subject">Text</label>
+                  <textarea id="subject" name="subject" placeholder="Write a blog.." style="height:200px"></textarea> -->
               
+
+                  <div class="editor-cont">
+                    <div class="navbars">
+                    <button onclick="addCode()" type="button" class="codeBtn"><i class="fa fa-code"></i></button>
+                    </div>
+                      <div class="editor" id="editor" contenteditable="true">
+                
+                      </div>
+                    </div>
+
                   <input onchange="previewImage(event)" type="file" style="display: none;" id="file-img">
                   
                   <div class="up-b">
@@ -110,11 +120,10 @@
       </div>
 
       <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+
+function addCode(){
+            document.getElementById("editor").innerHTML += "```<br><br>```"
+        }
 
             const previewImage = e => {
       const reader = new FileReader();
@@ -129,10 +138,11 @@
    function postBlog(e){
     e.preventDefault();
 let title = document.getElementById("fname").value?.trim();
-let text = document.getElementById("subject").value?.trim();
+let text = document.getElementById("editor").innerHTML?.trim();
 let img = document.getElementById('preview').src;
 
 if(title && text && img){
+    
     let CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/duldhdjsj/image/upload';
 
     let data = {
@@ -167,6 +177,7 @@ if(title && text && img){
             }).then((res) => res.json())
             .then((data) =>{
             console.log(data)
+           return window.location  ="./admin.blogs.html"
             })
             .catch((error)=>{
         console.log(error.message)

@@ -38,7 +38,7 @@
               </div>
                 
                 <div class="dropdown-content">
-                  <a href="#">Your Profile</a>
+                  <a href="./userProfile.html">Your Profile</a>
                   <a href="#">Settings</a>
                 <a href="#" onclick="logout()">Logout</a>
                 </div>
@@ -69,10 +69,15 @@
 
     <div class="right-cont">
         
-        <div class="container" id="containerBlogs">
+        <!-- <div class="container" id="containerBlogs"> -->
+
+          <div class="container" id="blogsCntainer">
+          
+          </div>
+      
        
             
-            <div class="column">
+            <!-- <div class="column">
                 <div class="post-module">
                   <div class="thumbnail"><img src="../images/js.jpg"></div>
                   <div class="post-content">
@@ -90,10 +95,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
 
-          </div>
+          <!-- </div> -->
 
     </div>
 
@@ -185,35 +190,70 @@
   }
 
   function logout(){
-  localStorage.removeItem("loggedInUserEmail");
+  localStorage.removeItem("token");
  return isLogged();
 }
 
-function isLogged(){
+function isLogged(username){
 
- let email = localStorage.getItem("loggedInUserEmail")
+ let token = localStorage.getItem("token")
 
- if(email){
-  document.getElementById("logSign").style.display = "none"
+ if(token){
+
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+    method: 'GET',
+    headers: {
+        'Authorization': token
+    }
+  })
+  .then((res) => res.json())
+    .then((res) =>{
+      if(res.username){
+        document.getElementById("logSign").style.display = "none"
    document.getElementById("profileauth").style.display = "flex"
-   document.getElementById("username-display").innerHTML  = localStorage.getItem("username")
+   document.getElementById("username-display").innerHTML  = res.username;
    return ;
- }else{
+      }else{
+        document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+      }
+    });
+ }if(!token){
   document.getElementById("logSign").style.display = "block"
    document.getElementById("profileauth").style.display = "none"
  }
 }
 
 window.onload = function(){
-  isLogged()
+  isLogged('')
 
   fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs", {
     method: 'GET'
   })
-  .then((res) => res.json())
+  .then((res) => res.json())  
     .then((blogs) =>{
           for(let i=0; i<blogs.length; i++){
-
+           document.getElementById("blogsCntainer").innerHTML += `
+           <div class="card" style="cursor: pointer;" onclick="window.location = './oneBlog.html?id=${blogs[i]?._id}'">
+              <div class="card-header">
+                <img src="${blogs[i].fileUrl}" alt="" />
+              </div>
+              <div class="card-body">
+                <span class="tag tag-teal">Technology</span>
+                <h4> ${blogs[i].title}</h4>
+                <p class='texts'>
+                  ${blogs[i].text?.length>120 ? blogs[i].text?.trim().slice(0,120)+"..." : blogs[i].text}
+                </p>
+                <div class="user">
+                  <img src="../images/pic.jpg" alt="" class="img-ppp" />
+                  <div class="user-info">
+                    <h5>Emmanuel Dufitumukiza</h5>
+                    <small>${new Date(blogs[i].createdAt).toLocaleDateString()}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+           `
           }
     })
 }

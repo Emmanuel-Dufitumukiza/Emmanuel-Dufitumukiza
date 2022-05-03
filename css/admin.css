@@ -230,7 +230,7 @@ a{
     margin-right: 14px;
 }
 
-.moreBtn,.delBtn{
+.moreBtn,.delBtn,.ch-btn-pass{
     background-color: crimson;
     padding: 10px 30px !important;
     border: none;
@@ -264,7 +264,7 @@ a{
     top: -15px;
 }
 
-input[type=text], textarea {
+input[type=text], textarea,input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -506,4 +506,74 @@ p{
 
 .img-blo>img{
   border-radius: 4px !important;
+}
+
+.delAlert{
+  position: fixed;
+}
+
+
+.editor-cont{
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid gray;
+  background-color: white;
+  margin: 10px auto;
+}
+
+.editor{
+  min-height: 300px;
+  max-height: 700ppx !important;
+  outline: none;
+  font-size: 20px;
+  padding: 10px;
+  overflow: auto;
+}
+.navbars{
+  width: 100%;
+  background-color: whitesmoke;
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.codeBtn{
+  padding: 5px;
+  font-size: 18px;
+  background-color: whitesmoke;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.saveBtn{
+  background-color: rgb(27, 216, 27);
+  display: none;
+}
+
+.change-pass{
+  color: dodgerblue;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  top: 40px;
+  user-select: none;
+}
+
+.change-pass:hover{
+  color: #4723D9;
+}
+
+.ch-btn-pass{
+  background-color: rgb(27, 216, 27);
+}
+
+.alert22{
+position: fixed;
+}
+
+.r-c-cont{
+  margin-left: -170px;
 }

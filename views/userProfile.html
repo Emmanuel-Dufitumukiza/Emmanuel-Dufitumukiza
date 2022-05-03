@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script>
+    <!-- ===== CSS ===== -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
+    <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script> 
+    <link
+    rel="stylesheet"
+    href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/skills.css">
+    <link rel="stylesheet" href="../css/blogs.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
 
-        <!-- ===== BOX ICONS ===== -->
-        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-        <script src="https://kit.fontawesome.com/a05ef9628f.js" crossorigin="anonymous"></script>
-        <!-- ===== CSS ===== -->
-        <link rel="stylesheet" href="../css/admin.css">
-        <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>
-
-        <title>Add Blog</title>
-    </head>
-    <body class="body-pd" id="body-pd">
-        <header class="header body-pd" id="header">
-            <div class="header__toggle">
-                <i class='bx bx-menu' id="header-toggle"></i>
+    <div class="navbar">
+        <div class="links-cont">
+            <a href="./index.html">Home</a>
+            <a href="./index.html#aboutme">About me</a>
+            <a href="./index.html#portfolio">Portfolio</a>
+            <a href="./index.html#skills">Skills</a>
+            <a href="./index.html#contactme">Contact me</a>
+            <a href="./blogs.html" class="active-link">Blogs</a>
+            <div class="moon">
+                <button><i class="fa-moon uil uil-moon change-theme"></i></button>
             </div>
-
-            <h3 class="page-title">Your Profile</h3>
-
-            <div class="header__img">
-                <img src="../images/user.jpg" id="my-profile-p" alt="">
-            </div>
-        </header>
-
-        <div class="l-navbar show" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="#" class="nav__logo">
-                        <i class='bx bx-layer nav__logo-icon'></i>
-                        <span class="nav__logo-name">Emmanuel</span>
-                    </a>
-<br><br>
-                    <div class="nav__list">
-                        <!-- <a href="#" class="nav__link">
-                        <i class='bx bx-grid-alt nav__icon' ></i>
-                            <span class="nav__name">Dashboard</span>
-                        </a> -->
-
-                        <a href="./users.html" class="nav__link">
-                            <i class='bx bx-user nav__icon' ></i>
-                            <span class="nav__name">Users</span>
-                        </a>
-                        
-                        <!-- <a href="#" class="nav__link">
-                            <i class='bx bx-message-square-detail nav__icon' ></i>
-                            <span class="nav__name">Messages</span>
-                        </a> -->
-
-                        <a href="./admin.blogs.html" class="nav__link">
-                            <i class='bx bx-bookmark nav__icon' ></i>
-                            <span class="nav__name">Blogs</span>
-                        </a>
-
-                        <a href="./addBlog.html" class="nav__link">
-                            <i class='bx bx-folder nav__icon' ></i>
-                            <span class="nav__name">Add Blog</span>
-                        </a>
-
-                        <a href="./profile.html" class="nav__link active">
-                            <i class='fa fa-user nav__icon' ></i>
-                            <span class="nav__name">Profile</span>
-                        </a>
-                    </div>
+           <div>
+            <a id="logSign" style="text-decoration: none;" href="./login.html"><button class="btn"><i class="fa fa-sign-in"></i> Login/Signup</button></a>
+            <div id="profileauth" class="loggedUser">
+              <div class="dropdown  ">
+              <div style="display: flex;">
+                <div class="imggg">
+                  <img src="../images/user.jpg" id="user-o-p" alt="">
                 </div>
+                &nbsp;<p style="font-weight: bold;font-style: italic;" id="username-display"></p>
+              </div>
+                
+                <div class="dropdown-content">
+                  <a href="./userProfile.html">Your Profile</a>
+                  <a href="#">Settings</a>
+                <a href="#" onclick="logout()">Logout</a>
+                </div>
+              </div>
+            </div>
+           </div>
+        </div>
+    </div>
 
-                <a onclick="logout()" class="nav__link">
-                    <i class='bx bx-log-out nav__icon' ></i>
-                    <span class="nav__name">Log Out</span>
-                </a>
-            </nav>
+    <div class="left-side-bar">
+
+        <div class="logo-cont">
+            
         </div>
 
-      <div class="blogs">
-          <br><h4 id="myInfo" class="user-name"><span id="user-name2"></span> &nbsp; &nbsp; <button onclick="edit()"><i class="fa fa-edit"></i></button></h4>
-       <div id="edit-inp" class="edit-inp">
-           <label for="">Enter a new username</label>
-        <input type="text" name="" id="user-name">
-        <button class="editBtn" onclick="changeUsername()">Save</button>
-        <button class="moreBtn" onclick="cancel()">Cancel</button>
-       </div>
-          <div class="profile-page">
-            <img id="preview" src="../images/user.jpg" alt="">
+        <div class="contact-social">
+            <div><button><i class="fa-brands fa-linkedin-in"></i></button></div>
+            <div><button><i class="fa-brands fa-twitter"></i></button></div>
+            <div><button><i class="fa-brands fa-github"></i></button></div>
+            <div><button><i class="fa-brands fa-instagram"></i></button></div>
         </div>
 
-        <br><br><div class="btns-act-cont">
-            <input style="display: none;" id="up" type="file" accept="image/*" onchange="previewImage(event)">
-            <button class="editBtn" onclick="upload()">Edit Profile</button> &nbsp;
-            <button class="editBtn saveBtn" onclick="chnageProfilePage()">Save Profile</button> &nbsp;
-            <button class="editBtn cancelBtn" onclick="cancelProfile()" style="background-color: crimson;color: white;display: none;">Cancel</button> &nbsp;
-        <button class="moreBtn remBtn" onclick="removeFile()" style="background-color: crimson;color: white;">Remove Profile</button>
+        <div class="bottom-line">
         </div>
 
-     <div style="text-align: center;margin-bottom: 60px;">
-        <span onclick="toggleChangePassword()" class="change-pass">Change Password</span>
+    </div>
+
+    <div class="right-cont">
+<div class="r-c-cont">
+    
+    <div class="blogs">
+        <br><h4 id="myInfo" class="user-name"><span id="user-name2"></span> &nbsp; &nbsp; <button onclick="edit()"><i class="fa fa-edit"></i></button></h4>
+     <div id="edit-inp" class="edit-inp">
+         <label for="">Enter a new username</label>
+      <input type="text" name="" id="user-name">
+      <button class="editBtn" onclick="changeUsername()">Save</button>
+      <button class="moreBtn" onclick="cancel()">Cancel</button>
      </div>
+        <div class="profile-page">
+          <img id="preview" src="../images/user.jpg" alt="">
+      </div>
 
-        </div>
+      <br><br><div class="btns-act-cont">
+          <input style="display: none;" id="up" type="file" accept="image/*" onchange="previewImage(event)">
+          <button class="editBtn" onclick="upload()">Edit Profile</button> &nbsp;
+          <button class="editBtn saveBtn" onclick="chnageProfilePage()">Save Profile</button> &nbsp;
+          <button class="editBtn cancelBtn" onclick="cancelProfile()" style="background-color: crimson;color: white;display: none;">Cancel</button> &nbsp;
+      <button class="moreBtn remBtn" onclick="removeFile()" style="background-color: crimson;color: white;">Remove Profile</button>
+      </div>
+
+   <div style="text-align: center;margin-bottom: 60px;">
+      <span onclick="toggleChangePassword()" class="change-pass">Change Password</span>
+   </div>
 
       </div>
+
       <p style="display: none;" id="id"></p>
 
       <div style="width: 45%;margin: auto;display: none;" id="passForm">
@@ -128,9 +128,11 @@
 
       </div>
       <div id="alert" class="alert alert22"><p>Password Changed Successfully!</p></div>
+</div>
+      </div>
 
       <script>
-
+          
 function upload(){
     document.getElementById("up").click()
 }
@@ -188,6 +190,7 @@ function upload(){
             console.log(data)
             getUser();
             cancel();
+            isLogged();
             });
       }else{
           alert("Username must be at least 4 characters long");
@@ -232,6 +235,7 @@ fetch(CLOUDINARY_URL, {
             console.log(data)
             getUser();
             cancelProfile();
+    isLogged();
             });
 
         });
@@ -283,10 +287,10 @@ fetch(CLOUDINARY_URL, {
       localStorage.setItem("file", user?.profileImage?.url)
       if(user?.profileImage?.url){
         document.getElementById('preview').src = user?.profileImage?.url;
-        document.getElementById("my-profile-p").src = user?.profileImage?.url;
+        document.getElementById("user-o-p").src = user?.profileImage?.url;
       }else{
         document.getElementById('preview').src = "../images/user.jpg" 
-        document.getElementById("my-profile-p").src =  "../images/user.jpg";
+        document.getElementById("user-o-p").src =  "../images/user.jpg";
       }
       });
       return ;
@@ -297,6 +301,7 @@ fetch(CLOUDINARY_URL, {
 
    window.onload = ()=>{
     getUser();
+    isLogged();
    }
 
    function changePassword(){
@@ -354,6 +359,38 @@ fetch(CLOUDINARY_URL, {
        return window.location = "./index.html";
    }
 
-    </script>
-    </body>
+function isLogged(){
+
+ let token = localStorage.getItem("token")
+
+ if(token){
+
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+    method: 'GET',
+    headers: {
+        'Authorization': token
+    }
+  })
+  .then((res) => res.json())
+    .then((res) =>{
+      if(res.username){
+        document.getElementById("logSign").style.display = "none"
+   document.getElementById("profileauth").style.display = "flex"
+   document.getElementById("username-display").innerHTML  = res.username;
+   return ;
+      }else{
+        document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+      }
+    });
+ }if(!token){
+  document.getElementById("logSign").style.display = "block"
+   document.getElementById("profileauth").style.display = "none"
+ }
+}
+
+      </script>
+
+
+</body>
 </html>

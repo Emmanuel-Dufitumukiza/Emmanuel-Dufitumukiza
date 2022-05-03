@@ -87,74 +87,40 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><img src="../images/me.png" /></td>
-                        <td>Emmanuel Dufitumukiza</td>
-                        <td>emmy@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td><img src="../images/pic.jpg" /></td>
-                        <td>Mugisha James</td>
-                        <td>joel@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td><img src="../images/me.png" /></td>
-                        <td>Jean Mark</td>
-                        <td>markjean@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td><img src="../images/me2.png" /></td>
-                        <td>Kim Jong</td>
-                        <td>kim@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td><img src="../images/pic.jpg" /></td>
-                        <td>Eliass Mung</td>
-                        <td>elias@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td><img src="../images/me2.png" /></td>
-                        <td>Karim Habul</td>
-                        <td>karim@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td><img src="../images/pic.jpg" /></td>
-                        <td>Gosling James</td>
-                        <td>gosling@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td><img src="../images/me.png" /></td>
-                        <td>Jack Manzi</td>
-                        <td>jack@gmail.com</td>
-                        
-                        <td><button>View</button></td>
-                    </tr>
+                <tbody id="users-container">
+                   
                 </tbody>
             </table>
         </div>
         <br><br>
+
+        <script>
+
+window.onload = ()=>{
+    getAllUsers();
+}
+
+            function getAllUsers(){
+               fetch("https://emmanueldufitumukiza.herokuapp.com/api/users", {
+                   method: "GET"
+               })
+               .then((data)=>data.json())
+               .then((res)=>{
+                for(let i=0; i<res.length; i++){
+                    document.getElementById("users-container").innerHTML += `
+                 <tr>
+                        <td style="text-align: center;">${i+1}</td>
+                        <td style="text-align: center;"><img src="${res[i]?.profileImage?.url ? res[i]?.profileImage?.url : "../images/user.jpg" }" /></td>
+                        <td style="text-align: center;">${res[i]?.username}</td>
+                        <td style="text-align: center;">${res[i]?.email}</td>
+                        
+                        <td style="text-align: center;"><button>View</button></td>
+                    </tr>
+                 `
+                }
+               })
+            }
+        </script>
+
     </body>
 </html>
