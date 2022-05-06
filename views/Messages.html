@@ -19,7 +19,7 @@
                 <i class='bx bx-menu' id="header-toggle"></i>
             </div>
 
-            <h3 class="page-title">Manage Users</h3>
+            <h3 class="page-title">Contact Messages</h3>
 
             <div class="header__img">
                 <img src="../images/me.png" alt="">
@@ -42,7 +42,7 @@
 
                     <br><br>
 
-                        <a href="#" class="nav__link active">
+                        <a href="#" class="nav__link">
                             <i class='bx bx-user nav__icon' ></i>
                             <span class="nav__name">Users</span>
                         </a>
@@ -67,7 +67,7 @@
                             <span class="nav__name">Profile</span>
                         </a>
 
-                        <a href="./Messages.html" class="nav__link">
+                        <a href="./Messages.html" class="nav__link active">
                             <i class='bx bx-chat nav__icon' ></i>
                             <span class="nav__name">Messages</span>
                         </a>
@@ -81,55 +81,96 @@
             </nav>
         </div>
 
-        <br><br><div class="header_fixed">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Profile Picture</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="users-container">
-                   
-                </tbody>
-            </table>
-        </div>
+       
         <br><br>
 
+        <div id="messages-cont" class="messages-cont">
+           
+        </div>
+
         <script>
+         window.onload = ()=>{
+             getMessages();
+             if(!localStorage.getItem("token")){
+                 window.location = "./login.html";
+             }
+         }
 
-window.onload = ()=>{
-    getAllUsers();
-    let token = localStorage.getItem("token");
+         const getTime = (sale)=>{
+        let hour = new Date(sale?.createdAt).getHours();
+        let minutes = new Date(sale?.createdAt).getMinutes();
+ 
+        let time_index = new Date().toLocaleTimeString().lastIndexOf(":");
+        let last_t = new Date(sale?.createdAt)
+          .toLocaleTimeString()
+          .slice(time_index + 3, new Date().toLocaleTimeString().length);
+        let months = new Date(sale?.createdAt).getMonth();
+        let date = new Date(sale?.createdAt).getDate();
+        let year = new Date(sale?.createdAt).getFullYear();
+      
+        let todayDate = new Date().getDate();
+        let todayMonth = new Date().getMonth();
+        let todayYear = new Date().getFullYear();
+      
+        const month = new Array();
+        month[0] = "Jan";
+        month[1] = "Feb";
+        month[2] = "Mar";
+        month[3] = "Apr";
+        month[4] = "May";
+        month[5] = "Jun";
+        month[6] = "Jul";
+        month[7] = "Aug";
+        month[8] = "Sep";
+        month[9] = "Oct";
+        month[10] = "Nov";
+        month[11] = "Dec";
+      
+        let name = month[months];
+        let fullDate = date + " " + name + " " + year;
+      
+        let fullTime = hour + ":" + minutes + "" + last_t;
+        let sendTime;
+      
+        if (todayYear == year && todayMonth == months && todayDate == date) {
+          sendTime = "Today " + fullTime;
+        } else {
+          sendTime = fullDate + " , " + fullTime;
+        }
 
-    if(!token){
-        window.location = "./login.html";
+        return sendTime;
     }
-}
 
-            function getAllUsers(){
-               fetch("https://emmanueldufitumukiza.herokuapp.com/api/users", {
-                   method: "GET"
-               })
-               .then((data)=>data.json())
-               .then((res)=>{
-                for(let i=0; i<res.length; i++){
-                    document.getElementById("users-container").innerHTML += `
-                 <tr>
-                        <td style="text-align: center;">${i+1}</td>
-                        <td style="text-align: center;"><img src="${res[i]?.profileImage?.url ? res[i]?.profileImage?.url : "../images/user.jpg" }" /></td>
-                        <td style="text-align: center;">${res[i]?.username}</td>
-                        <td style="text-align: center;">${res[i]?.email}</td>
-                        
-                        <td style="text-align: center;"><button>View</button></td>
-                    </tr>
-                 `
+         function getMessages(){
+            fetch("https://emmanueldufitumukiza.herokuapp.com/api/messages", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem("token")
                 }
-               })
-            }
+            }).then((res) => res.json())
+            .then((data) =>{
+                data = data.msg;
+               for(let i=data.length-1; i>=0; i--){
+                   document.getElementById("messages-cont").innerHTML+= 
+                   `
+                   <div class="card-msg-cont">
+              <p><b>Names:</b> ${data[i]?.names}</p>
+              <p><b>Email</b>: ${data[i]?.email}</p>
+              <p><b>Date</b>: ${getTime(data[i])}</p>
+             
+              <p style="position: relative;top: 15px;"><b>Message</b></p>
+              <p style="position: relative;top: 15px;">
+                  ${data[i]?.message}
+              </p>
+
+              <button class="replyBtn">Reply</button>
+
+            </div>
+                   `
+               }
+            });
+         }
         </script>
 
     </body>

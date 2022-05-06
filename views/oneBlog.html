@@ -206,7 +206,7 @@ function isLogged(username){
 
  if(token){
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
     method: 'GET',
     headers: {
         'Authorization': token
@@ -259,7 +259,7 @@ function getSingleBlog(){
   let token = localStorage.getItem("token");
   
 if(token){
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
     method: 'GET',
     headers: {
       'Authorization': token
@@ -312,7 +312,7 @@ if(!blogs?.likes.includes(localStorage.getItem("id"))){
               </div>
 
 ${
-  localStorage.getItem("id") == blogs?.comments[j]?.userId ?
+  localStorage.getItem("id") == blogs?.comments[j]?.userId && localStorage.getItem("token") ?
  ex
   :
   `<p></p>`
@@ -440,7 +440,7 @@ function login(){
   let id = arrs[1];
 
   if(isValid == true){
-    fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/comment/"+id, {
+    fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/"+id+"/comments", {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -480,16 +480,12 @@ function deleteComment(ids){
   let id = arrs[1];
   let token = localStorage.getItem("token");
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/comments/delete", {
-                method: 'PATCH',
+  fetch(`https://emmanueldufitumukiza.herokuapp.com/api/blogs/${id}/comments/${ids}`, {
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': token
-                },
-                body: JSON.stringify({
-                  blogId: id,
-                  id: ids
-                })
+                }
             }).then((res) => res)
             .then((data) =>{
             console.log(data)
@@ -513,7 +509,7 @@ if(c){
 }
   }
 
-  fetch(`https://emmanueldufitumukiza.herokuapp.com/api/blogs/like/${localStorage.getItem("id")}/${id}`, {
+  fetch(`https://emmanueldufitumukiza.herokuapp.com/api/blogs/${id}/likes`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

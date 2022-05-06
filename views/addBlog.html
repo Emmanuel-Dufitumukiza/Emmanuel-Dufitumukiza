@@ -65,6 +65,11 @@
                             <i class='fa fa-user nav__icon' ></i>
                             <span class="nav__name">Profile</span>
                         </a>
+
+                        <a href="./Messages.html" class="nav__link">
+                            <i class='bx bx-chat nav__icon' ></i>
+                            <span class="nav__name">Messages</span>
+                        </a>
                     </div>
                 </div>
 
@@ -166,12 +171,17 @@ if(title && text && img){
                 }
 
                 console.log(info)
+                let token = localStorage.getItem("token");
 
-                fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs/new", {
+                if(!token){
+                    window.location = "./login.html";
+                }
+
+                fetch("https://emmanueldufitumukiza.herokuapp.com/api/blogs", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjU4NGExNmEyZjRjZTUzNGE4YWU3OGYiLCJpYXQiOjE2NTA2NDY3Mzd9.xzVXejKeL4maU3pI2AEZyclRKo-606MVytsVe5UpcLI"
+                    'Authorization': token
                 },
                 body: JSON.stringify(info)
             }).then((res) => res.json())
@@ -191,6 +201,37 @@ if(title && text && img){
 
 }
    }
+
+   function isLogged(username){
+
+let token = localStorage.getItem("token")
+
+if(token){
+
+ fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
+   method: 'GET',
+   headers: {
+       'Authorization': token
+   }
+ })
+ .then((res) => res.json())
+   .then((res) =>{
+     if(res.username){
+      return ;
+     }else{
+        window.location = "./login.html"
+        return ;
+     }
+   });
+}if(!token){
+window.location = "./login.html"
+return ;
+}
+}
+
+window.onload = function(){
+ isLogged('')
+}
 
     </script>
     </body>

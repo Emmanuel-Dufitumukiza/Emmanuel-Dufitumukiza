@@ -178,7 +178,7 @@ function upload(){
       let token = localStorage.getItem("token");
 
       if(name.length>3){
-        fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/update/"+id, {
+        fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/", {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -220,7 +220,7 @@ fetch(CLOUDINARY_URL, {
             body: JSON.stringify(data)
         }).then((res) => res.json())
         .then((data) =>{
-            fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/update/"+id, {
+            fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/", {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -252,7 +252,7 @@ fetch(CLOUDINARY_URL, {
     let id = document.getElementById("id").innerHTML;
     let token = localStorage.getItem("token");
 
-    fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/update/"+id, {
+    fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/", {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -273,7 +273,7 @@ fetch(CLOUDINARY_URL, {
    function getUser(){
     let token = localStorage.getItem("token");
   if(token){
-    fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+    fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
       method: 'GET',
       headers: {
         'Authorization': token
@@ -323,7 +323,7 @@ fetch(CLOUDINARY_URL, {
       let token = localStorage.getItem("token");
 
       document.getElementById("currError").style.display = "none";
-      fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/update/"+id, {
+      fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/", {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -365,7 +365,7 @@ function isLogged(){
 
  if(token){
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
     method: 'GET',
     headers: {
         'Authorization': token

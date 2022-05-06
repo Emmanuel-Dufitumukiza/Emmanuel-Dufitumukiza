@@ -258,7 +258,7 @@ if(isValidEmail == true && isValidPassword == true){
   let emails = document.getElementById("useremail").value.trim();
   let pass = document.getElementById("password").value;
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/login", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/login", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -298,7 +298,7 @@ function isLogged(username){
 
  if(token){
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
     method: 'GET',
     headers: {
         'Authorization': token

@@ -616,7 +616,7 @@ document.getElementById("emailError").style.display = "block"
         let email = document.getElementById("useremail").value.trim();
         let message = document.getElementById("message").value.trim();
 
-      fetch("https://emmanueldufitumukiza.herokuapp.com/api/sendMessage", {
+      fetch("https://emmanueldufitumukiza.herokuapp.com/api/messages", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -691,7 +691,7 @@ function isLogged(username){
 
  if(token){
 
-  fetch("https://emmanueldufitumukiza.herokuapp.com/api/getLoggedUser", {
+  fetch("https://emmanueldufitumukiza.herokuapp.com/api/users/info/loggedinuser", {
     method: 'GET',
     headers: {
         'Authorization': token
